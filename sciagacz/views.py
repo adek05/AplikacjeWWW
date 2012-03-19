@@ -6,9 +6,9 @@ src_re = r'src="'
 hyperlinks = r'<a.*?>([\s\S]*?)</a>'
 patterns = [
         r'<table id="toc"[\s\S]*?</table>',
-        r'<!-- header -->[\S\s]*?<!-- /header -->',
-        r'<!-- panel -->[\S\s]*?<!-- /panel -->',
-        r'<!-- footer -->[\S\s]*?<!-- /footer -->',
+        r'<!-- header -->[\S\s]*<!-- /header -->',
+        r'<!-- panel -->[\S\s]*<!-- /panel -->',
+        r'<!-- footer -->[\S\s]*<!-- /footer -->',
         ]
 image_source = r'([\S\s]*?src=")([\S\s]*?)("[\S\s]*)'
 
