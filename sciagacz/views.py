@@ -4,10 +4,12 @@ import re, io, urllib2
 
 src_re = r'src="'
 hyperlinks = r'<a.*?>([\s\S]*?)</a>'
-contents = r'<table id="toc"[\s\S]*?</table>'
-header = r'<!-- header -->[\S\s]*?<!-- /header -->'
-panel = r'<!-- panel -->[\S\s]*?<!-- /panel -->'
-footer = r'<!-- footer -->[\S\s]*?<!-- /footer -->'
+patterns = [
+        r'<table id="toc"[\s\S]*?</table>',
+        r'<!-- header -->[\S\s]*?<!-- /header -->',
+        r'<!-- panel -->[\S\s]*?<!-- /panel -->',
+        r'<!-- footer -->[\S\s]*?<!-- /footer -->',
+        ]
 image_source = r'([\S\s]*?src=")([\S\s]*?)("[\S\s]*)'
 
 def load_html(url):
@@ -18,10 +20,8 @@ def load_html(url):
 def parse(url):
     html = load_html(url)
     html = html.replace('href="/', 'href="http://') # links to styles, images etc.
-    html = re.sub(header, '', html) # fuck off header
-    html = re.sub(panel, '', html) # fuck off panel
-    html = re.sub(footer, '', html) # fuck off panel
-    html = re.sub(contents, '', html) # fuck off contents
+    for pattern in patterns:
+        html = re.sub(pattern, '', html) # get rid of dirty stuff
     res = ''
     prev = 0
     img_num = 1
